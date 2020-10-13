@@ -5,7 +5,7 @@ public class ClockDisplayTest {
 		// TODO Auto-generated method stub
 		ClockDisplay clock = new ClockDisplay();
 		
-		for (int i=0; i<100; i++) {
+		for (int i=0; i<1000; i++) {
 			clock.timeTick();
 			System.out.println(clock.toString());
 			

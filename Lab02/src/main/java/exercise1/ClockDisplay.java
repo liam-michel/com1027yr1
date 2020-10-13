@@ -4,12 +4,13 @@ import java.text.DecimalFormat;
 public class ClockDisplay {
 	private NumberInfo hours;
 	private NumberInfo minutes;
-	private boolean after12=false;
-	private int counter=0;
-	
-	public ClockDisplay() {
+	private boolean twelvehour;
+	private int counter = 0 ;
+	public ClockDisplay(boolean twelvehour) {
 		this.hours= new NumberInfo(24);
 		this.minutes=new NumberInfo(60);
+		this.twelvehour=twelvehour;
+		
 		
 	}
 	
@@ -18,28 +19,45 @@ public class ClockDisplay {
 		
 		if (minutes.getValue()==0) {
 			this.hours.increment();
-			counter++;
-			if (counter==12) {
-				after12=true;
-			}
+			counter+=1;
+
 			
 		
-			
+		
 			
 		}
 	}
 
 	@Override
 	public String toString() {
-		DecimalFormat style = new DecimalFormat("0");
-		if (after12==false){
-			return (style.format(this.hours.getValue()) + ":" + style.format(this.minutes.getValue())+"am"); }
-		else {
-			return (style.format(this.hours.getValue()) + ":" + style.format(this.minutes.getValue())+"pm"); }
+		DecimalFormat hourstyle = new DecimalFormat("0");
+		DecimalFormat minutestyle = new DecimalFormat("00");
+		if (this.twelvehour){
+			if (counter==12) {
+				return(12+":"+minutestyle.format(this.minutes.getValue())+"pm");
+			}
+			else if(counter==24) {
+				return "0:00am";
+			}
+			else if(counter>12) {
+				return (hourstyle.format(this.hours.getValue()%12) + ":" + minutestyle.format(this.minutes.getValue())+"pm");}		
+			else {
+				return (hourstyle.format(this.hours.getValue()%12) + ":" + minutestyle.format(this.minutes.getValue())+"am");}
+		}else {
+			DecimalFormat style = new DecimalFormat("00");
+			return (style.format(this.hours.getValue()) + ":" + style.format(this.minutes.getValue()));}
 		}
-			
-		
 }
+		
+		
+
+	
+		
+	
+	
+
+		
+
 	
 	
 	
