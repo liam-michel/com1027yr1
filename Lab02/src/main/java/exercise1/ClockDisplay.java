@@ -20,10 +20,7 @@ public class ClockDisplay {
 		if (minutes.getValue()==0) {
 			this.hours.increment();
 			counter+=1;
-
-			
-		
-		
+	
 			
 		}
 	}

@@ -58,7 +58,7 @@ public class Employee {
 		else {
 			return (this.getSurname()+", "+this.getForename()+" ("+this.getId()+"): "+this.companyPosition.getRoleName()+" at £"+this.getSalary()+" (£"+this.salary.calculateTax()+" tax) and is not eligible for bonus.");}
 			
-		}
+	}
 	
 	
 }
