@@ -6,10 +6,10 @@ public abstract class User {
 	
 	public User(String fullname) {
 		this.fullname=fullname;
-		String regex = "[A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+";
-		boolean matchfound = fullname.matches(regex);
-		if (!matchfound) {
-			throw new IllegalArgumentException();
+		String regex = "[A-Z]{1}[a-z]+\\s[A-Z]{1}[a-z]+";
+		boolean matchfound=fullname.matches(regex);
+		if (!matchfound) {  //if the name does not match the regex then throw an exception
+			throw new IllegalArgumentException("Both names must start with capital letters");
 		}
 	}
 	
