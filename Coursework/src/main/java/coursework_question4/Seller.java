@@ -6,11 +6,6 @@ public class Seller extends User {
 	
 	public Seller(String fullname) {
 		super(fullname);
-		String regex = "([A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+)";
-		boolean matchfound = fullname.matches(regex);
-		if (!matchfound) {
-			throw new IllegalArgumentException();
-		}
 		
 	
 	}

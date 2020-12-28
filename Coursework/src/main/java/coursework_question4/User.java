@@ -6,6 +6,11 @@ public abstract class User {
 	
 	public User(String fullname) {
 		this.fullname=fullname;
+		String regex = "[A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+";
+		boolean matchfound = fullname.matches(regex);
+		if (!matchfound) {
+			throw new IllegalArgumentException();
+		}
 	}
 	
 

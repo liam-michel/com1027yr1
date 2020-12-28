@@ -44,6 +44,20 @@ public class AdvertJTest {
 	}
 	
 
+	@Test
+	public void coursework_testGetHighestOffer() {
+		Car car = new Car(4567,"Ford KA",1500,Condition.USED);
+		advert = new Advert(car);
+		User user1 = new User("Person One");
+		User user2 = new User("Person Two");
+		Offer offer1 = new Offer(user1,1000);
+		Offer offer2 = new Offer(user2, 800);
+		advert.placeOffer(user1, 1000);
+		advert.placeOffer(user2,800);
+		boolean x = offer1.equals(advert.getHighestOffer());
+
+		assertEquals(x,true);
+	}
 
 	
 	
