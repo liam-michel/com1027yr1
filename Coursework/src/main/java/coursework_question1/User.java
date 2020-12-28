@@ -7,7 +7,7 @@ public class User {
 	public User(String fullname) {
 		//regex that allows for two words starting with capitals followed by 1 or more letters, both words seperated by a space
 		//I require atleast one lowercase letter after the uppercase one as otherwise it'd be an initial rather then a name.
-		String regex = "([A-Z]{1}[a-z]+\s[A-Z]{1}[a-z]+)";
+		String regex = "";
 		boolean matchfound=fullname.matches(regex);
 		if (!matchfound) {  //if the name does not match the regex then throw an exception
 			throw new IllegalArgumentException("Both names must start with capital letters");
