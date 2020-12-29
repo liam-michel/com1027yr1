@@ -1,5 +1,7 @@
 package coursework_question1;
 import java.util.Map;
+
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -21,14 +23,14 @@ public class Auctioneer {
 	
 	private boolean checkExistence (Car car) {
 		//checks if car is in the sequence of cars for sale
-		for(Advert advert: this.carsForSale.keySet()) {
-			if(advert.getCar().equals(car)) {
-				System.out.println("Found car match");
-				return true;
+		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
+			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
+				System.out.println("Found car match"); 
+				return true; //return true
 			}
 		}
 		
-		return false;
+		return false; //we only reach here if a match was not found, we return false
 	}
 	
 	
@@ -36,7 +38,7 @@ public class Auctioneer {
 		DecimalFormat priceformat = new DecimalFormat("0.00"); //format for the price
 		StringBuilder returnstring = new StringBuilder();
 		returnstring.append("SOLD CARS:\n");
-		for (Map.Entry<Advert,User> entry: this.soldCars.entrySet()) {
+		for (Map.Entry<Advert,User> entry: this.soldCars.entrySet()) { //iterating over the entries in the soldCars Map
 			Car advertcar= entry.getKey().getCar();
 			User buyer = entry.getValue();
 			returnstring.append(advertcar.getID()+ " - Purchased by "+buyer.getName());
@@ -45,23 +47,23 @@ public class Auctioneer {
 			//that value is then formatted with DecimalFro
 		}
 		
-		return returnstring.toString();
+		return returnstring.toString();  //Convert the StringBuilder to type String and return it
 	}
 	
 	
 	public String displayStatistics() {
-		return "Statistics";
+		return "Statistics";  
 	}
 	
 	
-	public String displayUnsoldCars() {
+	public String displayUnsoldCars() { //method to display details of all unsold cars
 		StringBuilder returnstring = new StringBuilder();
 		returnstring.append("UNSOLD CARS:\n");
 		for (Advert advert: this.unsoldCars.keySet()) {
-			returnstring.append(advert.toString()+"\n");
+			returnstring.append(advert.toString()+"\n"); //append the toString() representation of the advert to the StringBuilder
 		}
 		
-		return returnstring.toString();
+		return returnstring.toString(); //Convert the StringBuilder to type String and return it
 	}
 	
 	
@@ -70,14 +72,9 @@ public class Auctioneer {
 			throw new IllegalArgumentException();
 		}
 		
-		for (Advert index: this.carsForSale.keySet()) {
-			if (index.equals(advert)) {
-				this.carsForSale.remove(index);
-				break;
-				
-			}
-		}
-		
+		User seller = null;
+		seller=this.carsForSale.get(advert);
+		this.carsForSale.remove(advert);
 		
 		Offer highestoffer= advert.getHighestOffer();		
 		User buyer = highestoffer.getBuyer();

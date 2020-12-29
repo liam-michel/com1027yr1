@@ -73,12 +73,7 @@ public class Trader extends Dealership {
 			throw new IllegalArgumentException();
 		}		
 			
-		for(Map.Entry<Advert,Seller> entry: this.carsForSale.entrySet()) {
-			if (entry.getKey().equals(advert)) {
-				this.carsForSale.remove(entry);
-				break;
-			}
-		}
+		this.carsForSale.remove(advert);
 
 		
 		Offer highestoffer= advert.getHighestOffer();		

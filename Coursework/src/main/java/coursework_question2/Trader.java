@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class Trader {
 	protected String name;
 	protected Map <Advert, User> carsForSale;
@@ -69,14 +71,9 @@ public class Trader {
 			throw new IllegalArgumentException();
 		}
 		
-		for (Advert index: this.carsForSale.keySet()) {
-			if (index.equals(advert)) {
-				this.carsForSale.remove(index);
-				break;
-				
-			}
-		}
-		
+		User seller = null;
+		seller=this.carsForSale.get(advert);
+		this.carsForSale.remove(advert);
 		
 		Offer highestoffer= advert.getHighestOffer();		
 		User buyer = highestoffer.getBuyer();

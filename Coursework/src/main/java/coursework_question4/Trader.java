@@ -126,13 +126,9 @@ public class Trader extends Dealership {
 		}		
 			
 		Seller seller = null;
-		for(Map.Entry<Advert,Seller> entry: this.carsForSale.entrySet()) {
-			if (entry.getKey().equals(advert)) {
-				this.carsForSale.remove(entry);
-				seller = entry.getValue();
-				break;
-			}
-		}
+		seller = this.carsForSale.get(advert);
+		
+		this.carsForSale.remove(advert);
 
 		
 		Offer highestoffer= advert.getHighestOffer();		

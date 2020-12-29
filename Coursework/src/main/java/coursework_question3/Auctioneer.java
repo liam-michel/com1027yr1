@@ -68,14 +68,8 @@ public class Auctioneer extends Dealership {
 		}
 		
 		User seller = null;
-		
-		for(Map.Entry<Advert,Seller> entry: this.carsForSale.entrySet()) {
-			if (entry.getKey().equals(advert)) {
-				seller = entry.getValue();
-				this.carsForSale.remove(seller);
-				break;
-			}
-		}
+		seller=this.carsForSale.get(advert);
+		this.carsForSale.remove(advert);
 		
 		Offer highestoffer= advert.getHighestOffer();		
 		User buyer = highestoffer.getBuyer();

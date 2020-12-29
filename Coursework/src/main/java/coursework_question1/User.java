@@ -23,7 +23,7 @@ public class User {
 	public String getName() {
 	String[] splitstring = this.fullname.split(" "); //splits the users fullname on space 	
 	String fname = splitstring[0];  //first (0th) slot in the array contains first name
-	return fname;  
+	return fname;  //returns the firstname
 	
 	}
 	

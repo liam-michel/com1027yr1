@@ -2,6 +2,7 @@ package coursework_question2;
 import java.util.Map;
 
 
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -71,13 +72,9 @@ public class Auctioneer {
 			throw new IllegalArgumentException();
 		}
 		
-		for (Advert index: this.carsForSale.keySet()) {
-			if (index.equals(advert)) {
-				this.carsForSale.remove(index);
-				break;
-				
-			}
-		}
+		User seller = null;
+		seller=this.carsForSale.get(advert);
+		this.carsForSale.remove(advert);
 		
 		
 		Offer highestoffer= advert.getHighestOffer();		
@@ -98,6 +95,7 @@ public class Auctioneer {
 			throw new IllegalArgumentException();
 		}
 		
+
 		for (Advert advert: this.carsForSale.keySet()) { //iterates over the keys in the forsale hashmap
 			if (advert==carAdvert) {  //checks to see if the passed in advert == the one we are at in the hashmap
 				advert.placeOffer(user, value); //if it is, then place the offer with the passed in user and value
