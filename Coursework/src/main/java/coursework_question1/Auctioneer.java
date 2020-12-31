@@ -6,13 +6,13 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 
 
-public class Auctioneer {
+public class Auctioneer {  //defining all of the fields
 	protected String name;
 	protected Map <Advert, User> carsForSale;
 	protected Map <Advert, User> soldCars;
 	protected Map <Advert, User> unsoldCars;
 
-	public Auctioneer(String name) {
+	public Auctioneer(String name) { //parameterised constructor taking in a String name input, then initialising the name field along with the HashMaps
 		this.name=name;
 		this.carsForSale=new HashMap<Advert,User>();
 		this.soldCars= new HashMap<Advert,User>();
@@ -21,7 +21,8 @@ public class Auctioneer {
 	}
 	
 	
-	private boolean checkExistence (Car car) {
+	public boolean checkExistence (Car car) {
+		//we don't need to check if the Car object is null as this exception is already handled in the Advert class (from which we get the car).
 		//checks if car is in the sequence of cars for sale
 		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
 			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
@@ -30,21 +31,21 @@ public class Auctioneer {
 			}
 		}
 		
-		return false; //we only reach here if a match was not found, we return false
+		return false; //we only get here if we didn't find a match, so we return false (car is not already up for sale.
 	}
 	
 	
-	public String displaySoldCars() {
+	public String displaySoldCars() {  //method to display details of all sold cars
 		DecimalFormat priceformat = new DecimalFormat("0.00"); //format for the price
-		StringBuilder returnstring = new StringBuilder();
-		returnstring.append("SOLD CARS:\n");
+		StringBuilder returnstring = new StringBuilder(); 
+		returnstring.append("SOLD CARS:\n");  //The title for the output.
 		for (Map.Entry<Advert,User> entry: this.soldCars.entrySet()) { //iterating over the entries in the soldCars Map
-			Car advertcar= entry.getKey().getCar();
-			User buyer = entry.getValue();
+			Car advertcar= entry.getKey().getCar();  //get the Car object from the current entries key(type Advert)
+			User buyer = entry.getValue(); //get the value from the current entry
 			returnstring.append(advertcar.getID()+ " - Purchased by "+buyer.getName());
 			returnstring.append(" with a successful £"+priceformat.format(entry.getKey().getHighestOffer().getValue())+" bid. \n");
 			//the above line uses the Adverts getHighestOffer() method to return an Offer object, then gets the value of that offer
-			//that value is then formatted with DecimalFro
+			//that value is then formatted with our DecimalFormat object (priceformat) 
 		}
 		
 		return returnstring.toString();  //Convert the StringBuilder to type String and return it
@@ -59,7 +60,7 @@ public class Auctioneer {
 	public String displayUnsoldCars() { //method to display details of all unsold cars
 		StringBuilder returnstring = new StringBuilder();
 		returnstring.append("UNSOLD CARS:\n");
-		for (Advert advert: this.unsoldCars.keySet()) {
+		for (Advert advert: this.unsoldCars.keySet()) { //iterate over the keys in the unSoldCars map (type Advert)
 			returnstring.append(advert.toString()+"\n"); //append the toString() representation of the advert to the StringBuilder
 		}
 		
@@ -68,19 +69,19 @@ public class Auctioneer {
 	
 	
 	public void endSale(Advert advert) {
-		if (advert==null) {
+		if (advert==null) { 
 			throw new IllegalArgumentException();
 		}
 		
 		User seller = null;
 		seller=this.carsForSale.get(advert);
-		this.carsForSale.remove(advert);
+		this.carsForSale.remove(advert); //remove the advert from the carsForSale map.
 		
 		Offer highestoffer= advert.getHighestOffer();		
 		User buyer = highestoffer.getBuyer();
-		if (highestoffer.getValue()<advert.getCar().getPrice()) {
+		if (highestoffer.getValue()<advert.getCar().getPrice()) { //if the highestoffer is less than the reserved price, then the car is not sold, but is added to unsoldCars
 			this.unsoldCars.put(advert, buyer);
-		}else {
+		}else { //otherwise, the car is sold and put in the soldCars map.
 		
 			this.soldCars.put(advert, buyer);
 		}	
@@ -112,6 +113,7 @@ public class Auctioneer {
 			throw new IllegalArgumentException();
 		}
 		
+		//initialising the colour, type, body and seatnumber of the Car in the advert
 		carAdvert.getCar().setColour(colour);
 		carAdvert.getCar().setGearbox(type);
 		carAdvert.getCar().setBody(body);

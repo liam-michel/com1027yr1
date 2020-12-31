@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Trader extends Dealership {
 
+	private int totalsales;
 	private List<Seller> sellers;
 	private Map <Advert, Seller> carsForSale;
 	private Map <Advert, Buyer> soldCars;
@@ -18,6 +20,7 @@ public class Trader extends Dealership {
 	
 	public Trader(String name) {
 		super(name);
+		this.totalsales=0;
 		this.sellers = new ArrayList<Seller>();
 		this.carsForSale=new HashMap<Advert,Seller>();
 		this.soldCars= new HashMap<Advert,Buyer>();
@@ -65,7 +68,10 @@ public class Trader extends Dealership {
 	}
 	
 	private void updateStatistics(Seller seller) {
-	
+		this.totalsales+=1; //increment the total number of sales (collectively, not for the specific seller)
+		updateSales(seller);  //method that updates the sellers sales
+		this.sellers.sort(Comparator.comparing(Seller::getName)); //sorts the sellers list alphabetically by Sellers First Name A-Z (Ascending order)
+
 	
 	}
 		
@@ -136,7 +142,6 @@ public class Trader extends Dealership {
 		
 
 		this.soldCars.put(advert,buyer);
-		updateSales(seller);
 		updateStatistics(seller);
 		
 	}

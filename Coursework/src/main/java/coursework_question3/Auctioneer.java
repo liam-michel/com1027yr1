@@ -21,9 +21,13 @@ public class Auctioneer extends Dealership {
 	}
 	
 	private boolean checkExistence (Car car) {
-		if(carsForSale.keySet().contains(car)) {
-			return true;
+		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
+			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
+				System.out.println("Found car match"); 
+				return true; //return true
+			}
 		}
+		
 		return false;
 		
 	}

@@ -1,8 +1,5 @@
 package coursework_question2;
 import java.util.Map;
-
-
-
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -23,10 +20,10 @@ public class Auctioneer {
 	
 	private boolean checkExistence (Car car) {
 		//checks if car is in the sequence of cars for sale
-		for(Advert advert: this.carsForSale.keySet()) {
-			if(advert.getCar().equals(car)) {
-				System.out.println("Found car match");
-				return true;
+		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
+			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
+				System.out.println("Found car match"); 
+				return true; //return true
 			}
 		}
 		

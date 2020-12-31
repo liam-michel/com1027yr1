@@ -94,7 +94,7 @@ public class Trader extends Dealership {
 			throw new IllegalArgumentException("You can only place an offer on an item if its for sale.");
 		}
 		
-		
+	
 		for (Advert advert: this.carsForSale.keySet()) { //iterates over the keys in the forsale hashmap
 			if (advert.equals(carAdvert)) {  //checks to see if the passed in advert == the one we are at in the hashmap
 				advert.placeOffer(user, value); //if it is, then place the offer with the passed in user and value

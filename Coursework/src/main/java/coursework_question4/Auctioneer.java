@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class Auctioneer extends Dealership {
 	private Seller topSeller;
-
+	private int manualsales;
+	private int automaticsales;
 	private Map<Seller,Integer> sales;
 	private Map<Advert,Seller> carsForSale;
 	private Map<Advert,Buyer> soldCars;
@@ -15,6 +16,8 @@ public class Auctioneer extends Dealership {
 
 	public Auctioneer(String name) {
 		super(name);
+		this.manualsales=0;
+		this.automaticsales=0;
 		this.topSeller=null;
 		this.sales = new HashMap<Seller,Integer>();
 		this.carsForSale=new HashMap<Advert,Seller>();
@@ -22,10 +25,15 @@ public class Auctioneer extends Dealership {
 		this.unsoldCars= new HashMap<Advert,Seller>();
 	}
 	
-	private boolean checkExistence (Car car) {
-		if(carsForSale.keySet().contains(car)) {
-			return true;
+	
+	public boolean checkExistence (Car car) {
+		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
+			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
+				System.out.println("Found car match"); 
+				return true; //return true
+			}
 		}
+		
 		return false;
 	}
 	
@@ -38,8 +46,6 @@ public class Auctioneer extends Dealership {
 			}
 		}
 		
-		
-	
 	}
 	
 	
@@ -57,12 +63,13 @@ public class Auctioneer extends Dealership {
 	
 	}
 	
+
 	private void saveInFile(int noOfSales, double percentageOfAutomatic, double percentageOfManual) {
 		String filename = "auction_statistics.txt";
 		try {
 			FileWriter mywriter = new FileWriter(filename);
 			StringBuilder mybuilder = new StringBuilder();
-			mybuilder.append("Total Auction Sales: "+getAuctionSales());
+			mybuilder.append("Total Auction Sales: "+noOfSales);
 			mybuilder.append(" Automatic Cars: "+percentageOfAutomatic+"%");
 			mybuilder.append(" Manual Cars: "+percentageOfManual+"%\n");
 			mybuilder.append("Top Seller: "+this.topSeller.toString());
@@ -70,32 +77,28 @@ public class Auctioneer extends Dealership {
 			
 			mywriter.write(towrite); //write the towrite string
 			mywriter.close();  //close the filewriter
-			//System.out.println("File has successfully been written to");  //print string to inform user that the writing was successful
+
 			
 		}catch (IOException e) {
 			System.out.println("An IOException has occured");  
 		}
-	
-
 		
 	}
 
-	private void updateStatistics(Seller seller) { //this method is going to call all of the other ones concerned with updating values i.e the filewriting
+	
+	private void updateStatistics(Seller seller) { 
+		updateSales(seller);
 		updateTopSeller(seller);
+		
 		int totalsales = getAuctionSales();
 
-		int automaticsales = getAutomaticSales();
+		this.automaticsales = getAutomaticSales();
+		this.manualsales= totalsales-this.automaticsales;
 
-		double automatic = ((float)automaticsales / totalsales);  //calculates % of cars that are automatic
-
-		double manual = 1 - automatic;  //we can do 1 - automatic % to find the % that were manual
 		
-		automatic*=100;
-		manual*=100;
-		saveInFile(totalsales,automatic,manual);		
-	
 	}
 		
+	
 	private int getAuctionSales() {
 		int totalsales = 0;
 		for (Integer num: this.sales.values()) {
@@ -107,20 +110,16 @@ public class Auctioneer extends Dealership {
 	
 	private String makeStatistics() { //this will return the statistics that are to be written to the file
 		int totalsales = getAuctionSales();
-
-		int automaticsales = getAutomaticSales();
-
-		double automatic = ((float)automaticsales / totalsales);  //calculates % of cars that are automatic
-
-		double manual = 1 - automatic;  //we can do 1 - automatic % to find the % that were manual
+		double automaticpercentage = ((float)this.automaticsales / totalsales);  //calculates % of cars that are automatic
+		double manualpercentage = 1 - automaticpercentage;  //we can do 1 - automatic % to find the % that were manual
 		
-		automatic*=100;
-		manual*=100;
+		automaticpercentage*=100; //times them both by 100 for percentages
+		manualpercentage*=100;
 		
 		StringBuilder mybuilder = new StringBuilder();
 		mybuilder.append("Total Auction Sales: "+getAuctionSales());
-		mybuilder.append("	 Automatic Cars: "+automatic+"%");
-		mybuilder.append("	 Manual Cars: "+manual+"%\n");
+		mybuilder.append("	 Automatic Cars: "+automaticpercentage+"%");
+		mybuilder.append("	 Manual Cars: "+manualpercentage+"%\n");
 		mybuilder.append("Top Seller: "+this.topSeller.toString()+"\n");
 		
 		return mybuilder.toString();
@@ -128,10 +127,10 @@ public class Auctioneer extends Dealership {
 	
 	
 	public String displayStatistics() {
-		StringBuilder mybuilder = new StringBuilder();
-		mybuilder.append("** Auctioneer - "+super.name+"**\n");
-		mybuilder.append(makeStatistics());
-		return mybuilder.toString();
+		String mystring ="";
+		mystring+=("** Auctioneer - "+super.name+"**\n");
+		mystring+=(makeStatistics());
+		return mystring;
 	}
 	
 	public String displaySoldCars() {
@@ -182,13 +181,10 @@ public class Auctioneer extends Dealership {
 			this.unsoldCars.put(advert, (Seller)seller);
 		}else {
 			this.soldCars.put(advert, (Buyer)buyer);
-			updateSales(seller);
 			updateStatistics(seller);
 			
 		}	
-		
-		
-		
+			
 	}
 	
 	private void updateSales(Seller seller) {  //this method updates the this.sales<Seller,Integer> map, adding one to the number of sales
@@ -200,6 +196,8 @@ public class Auctioneer extends Dealership {
 		
 		seller.incrementSales(); //use the Seller incrementSales() method to update its sales field
 	}
+	
+	
 	
 	public boolean placeOffer(Advert carAdvert, User user, double value) {
 		if ((carAdvert==null) || (user==null)) {
