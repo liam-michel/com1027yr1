@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Trader extends Dealership {
 
-	private int totalsales;
+	private int totalsales; //brief says to keep track of total sales although this is not on UML.
 	private List<Seller> sellers;
 	private Map <Advert, Seller> carsForSale;
 	private Map <Advert, Buyer> soldCars;
@@ -41,13 +41,6 @@ public class Trader extends Dealership {
 	}
 	
 	
-	private int getnoOfSales() {
-		int total = 0;
-		for (Seller seller: this.sellers) {
-			total +=seller.getSales();
-		}
-		return total;
-	}
 	
 	private void saveInFile(int noOfSales) {
 		String filename = "trade_statistics.txt";
@@ -89,7 +82,7 @@ public class Trader extends Dealership {
 	public String displayStatistics() {
 		StringBuilder mybuilder = new StringBuilder();
 		mybuilder.append("** Trader - "+super.name+"**\n");
-		mybuilder.append("Total Sales: "+getnoOfSales()+"\n");
+		mybuilder.append("Total Sales: "+this.totalsales+"\n");
 		mybuilder.append("All Sellers:"+"\n");
 		mybuilder.append(AllSellersToString());
 		return mybuilder.toString();
@@ -151,7 +144,7 @@ public class Trader extends Dealership {
 		if (!(this.sellers.contains(seller))) { //if the sellers list does not contain the seller, then add it
 			this.sellers.add(seller);
 		}
-		seller.incrementSales(); //we increment the seller object either way 
+		seller.incrementSales(); //we increment the seller object's sales either way 
 		
 	}
 	
