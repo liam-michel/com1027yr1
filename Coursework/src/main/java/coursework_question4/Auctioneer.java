@@ -26,7 +26,7 @@ public class Auctioneer extends Dealership {
 	}
 	
 	
-	public boolean checkExistence (Car car) {
+	private boolean checkExistence (Car car) {
 		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)
 			if(advert.getCar().equals(car)) { //if the car parameter is the same as the one we current select:
 				System.out.println("Found car match"); 

@@ -21,7 +21,7 @@ public class Auctioneer {  //defining all of the fields
 	}
 	
 	
-	public boolean checkExistence (Car car) {
+	private boolean checkExistence (Car car) {
 		//we don't need to check if the Car object is null as this exception is already handled in the Advert class (from which we get the car).
 		//checks if car is in the sequence of cars for sale
 		for(Advert advert: this.carsForSale.keySet()) { //iterating through the keys in carForSale (type Advert)

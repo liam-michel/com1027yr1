@@ -13,8 +13,7 @@ public class Test {
 
 		Advert ad = new Advert(car);
 
-		auctioneer.registerCar(ad, seller, "Blue", CarType.AUTOMATIC, CarBody.HATCHBACK, 5);
-		System.out.println(auctioneer.checkExistence(car));
+
 	}
 
 }
