@@ -36,7 +36,7 @@ public class ReadyMeal {
 		return factory;
 	}
 	public String printContent() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder mybuilder = new StringBuilder();
 		String name = getType().toString();
 		int length = name.length();
 		String newname= (name.substring(0,1).toUpperCase()+ name.substring(1,length).toLowerCase());
@@ -45,22 +45,22 @@ public class ReadyMeal {
 			weight+= item.getTotalWeight();
 		}
 		
-		buffer.append(newname+ " " + this.name + " Ready Meal "+weight+" g\n");
-		buffer.append("\n");	
-		buffer.append("Contents\n");
+		mybuilder.append(newname+ " " + this.name + " Ready Meal "+weight+" g\n");
+		mybuilder.append("\n");	
+		mybuilder.append("Contents\n");
 		
 		for (IItem item: this.items) {
-			buffer.append("Calories: "+ item.getTotalCalories()+"kcal\n");
-			buffer.append("Meat (fat): "+item.getTotalFat(IngredientType.MEAT)+"g\n");
-			buffer.append("Vegetable (sodium): "+item.getTotalSodium(IngredientType.VEGETABLE)+"g\n");
-			buffer.append("\n");	}
+			mybuilder.append("Calories: "+ item.getTotalCalories()+"kcal\n");
+			mybuilder.append("Meat (fat): "+item.getTotalFat(IngredientType.MEAT)+"g\n");
+			mybuilder.append("Vegetable (sodium): "+item.getTotalSodium(IngredientType.VEGETABLE)+"g\n");
+			mybuilder.append("\n");	}
 		
-		buffer.append(factory.getAddress());
+		mybuilder.append(factory.getAddress());
 			
 			
 		
 		
-		return buffer.toString();
+		return mybuilder.toString();
 
 		
 	}

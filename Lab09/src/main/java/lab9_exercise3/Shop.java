@@ -1,6 +1,7 @@
 package lab9_exercise3;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.text.DecimalFormat;
 
 
@@ -22,11 +23,13 @@ public class Shop {
 	
 	public String displayCatalogue() {
 		DecimalFormat decformat = new DecimalFormat("00.00");
-		String returnstring= "Shop Catalogue\n" + "\n" + "Item		Price	Sale Price\n";
+		StringBuilder mybuilder = new StringBuilder();
+		mybuilder.append("Shop Catalogue\n" + "\n" + "Item		Price	Sale Price\n");
 		for (IItem item: this.items) {
-			returnstring+=(item.getName()+"	£"+decformat.format(item.getPrice())+"	£"+decformat.format(item.calculateSalePrice())+"\n");
+			mybuilder.append(item.getName()+"	£"+decformat.format(item.getPrice())+"	£"+decformat.format(item.calculateSalePrice())+"\n");
 		}
 		
+		String returnstring = mybuilder.toString();
 		return returnstring;
 	}
 	

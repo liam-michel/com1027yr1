@@ -55,29 +55,29 @@ public class Factory {
 	 * @return the factory's name and address in a pretty format.
 	 */
 	public String getAddress() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder mybuilder = new StringBuilder();
 
-		buffer.append(this.name);
-		buffer.append("\n");
+		mybuilder.append(this.name);
+		mybuilder.append("\n");
 
-		buffer.append(this.number);
-		buffer.append(" ");
-		buffer.append(this.street);
-		buffer.append("\n");
+		mybuilder.append(this.number);
+		mybuilder.append(" ");
+		mybuilder.append(this.street);
+		mybuilder.append("\n");
 
-		buffer.append(this.city);
-		buffer.append("\n");
+		mybuilder.append(this.city);
+		mybuilder.append("\n");
 
-		buffer.append(this.county);
-		buffer.append("\n");
+		mybuilder.append(this.county);
+		mybuilder.append("\n");
 
-		buffer.append(this.postcode);
-		buffer.append("\n");
+		mybuilder.append(this.postcode);
+		mybuilder.append("\n");
 
-		buffer.append(this.country);
-		buffer.append("\n");
+		mybuilder.append(this.country);
+		mybuilder.append("\n");
 
-		return buffer.toString();
+		return mybuilder.toString();
 	}
 
 	/**

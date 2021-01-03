@@ -17,12 +17,13 @@ public class PersonTracker {
 	}
 	
 	public String displayList() {
-		String returnstring="";
+		StringBuilder mybuilder = new StringBuilder();
 		for (Person person: this.peopleList) {
-			returnstring+=(person.toString()+'\n');
+			mybuilder.append(person.toString()+'\n');
 			
 		}
-		
+
+		String returnstring=mybuilder.toString();
 		return returnstring;
 	}
 	

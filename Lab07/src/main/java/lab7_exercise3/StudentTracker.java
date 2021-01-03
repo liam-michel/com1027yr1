@@ -24,12 +24,12 @@ public class StudentTracker {
 	}
 	
 	public String printStudents() {
-		String returnstring="";
+		StringBuilder returnstring= new StringBuilder();
 		for(Student student:this.studentList) {
-			returnstring+=student.getName()+"("+student.getUrn()+")\n";	
+			returnstring.append(student.getName()+"("+student.getUrn()+")\n");	
 		}
 		
-		return returnstring;
+		return returnstring.toString();
 		
 	}
 	
